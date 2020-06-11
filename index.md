@@ -5,8 +5,10 @@
 - bootstrap
 
 [https://www.xaviergilmore.net/](https://www.xaviergilmore.net/)
+
+
 Minimal Artist Portfolop Site
--bootstrap
+- bootstrap
 
 You can use the [editor on GitHub](https://github.com/xaviergilmore/xaviergilmore.github.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
 
