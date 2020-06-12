@@ -1,4 +1,4 @@
-## Web Developement
+## Web Development
 ### [https://consciousednow.com/](https://consciousednow.com/)
 - wordpress
 - bootstrap
