@@ -1,7 +1,4 @@
 ## Web Development
-### [https://consciousednow.com/](https://consciousednow.com/)
-- wordpress
-- bootstrap
 
 ### [https://www.xaviergilmore.net/](https://www.xaviergilmore.net/)
 
