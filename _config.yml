@@ -1,5 +1,5 @@
 baseurl:
-remote_theme: chrisbobbe/jekyll-theme-prologue 
+remote_theme: xaviergilmore/jekyll-theme-prologue 
 
 collections:
     authors:
