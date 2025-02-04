@@ -2,6 +2,7 @@ collections:
     authors:
      output: true
 
+<<<<<<< Updated upstream
 defaults:
   - scope:
       path: ""
@@ -17,3 +18,41 @@ defaults:
       path: ""
     values:
       layout: "default"
+=======
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+title: Xavier Gilmore
+subtitle: Your awesome subtitle
+description: >- # this means to ignore newlines until "baseurl:"
+  This is the demo site for a Jekyll theme version of
+  HTML5 UP's sleek, responsive site template Prologue.
+author: Xavier Gilmore
+email: xavier@xaviergilmore.net
+avatar: assets/images/avatar.jpg
+
+# You'll want to customize url and baseurl for your own site:
+baseurl: "/" # the subpath of your site, e.g. /blog
+url: "http://xaviergilmore.github.io" # the base hostname & protocol for your site
+
+# Social settings
+# Make sure to include the full url including protocol, e.g. https://github.com/chrisbobbe
+twitter_url:
+facebook_url:
+googleplus_url:
+instagram_url:
+linkedin_url: https://www.linkedin.com/in/xavier-gilmore-344ab22ba/
+github_url: https://github.com/xaviergilmore
+pinterest_url:
+slack_url:
+dribbble_url:
+
+# Google Analytics Tracking ID goes here:
+google_analytics:
+
+# The following settings are NECESSARY for the Prologue theme to run:
+remote_theme: xaviergilmore/jekyll-theme-prologue
+collections: [sections]
+>>>>>>> Stashed changes
