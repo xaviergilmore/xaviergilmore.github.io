@@ -25,22 +25,6 @@
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 
-defaults:
-  - scope:
-      path: ""
-      type: "authors"
-    values:
-      layout: "author"
-  - scope:
-      path: ""
-      type: "posts"
-    values:
-      layout: "post"
-  - scope:
-      path: ""
-    values:
-      layout: "default"
-
 # Site settings
 # These are used to personalize your new site. If you look in the HTML files,
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
@@ -65,8 +49,8 @@ twitter_url:
 facebook_url:
 googleplus_url:
 instagram_url:
-linkedin_url: https://www.linkedin.com/in/xavier-gilmore-344ab22ba/
-github_url: https://github.com/xaviergilmore
+linkedin_url:
+github_url:
 pinterest_url:
 slack_url:
 dribbble_url:
@@ -77,7 +61,3 @@ google_analytics:
 # The following settings are NECESSARY for the Prologue theme to run:
 remote_theme: xaviergilmore/jekyll-theme-prologue
 collections: [sections]
-<<<<<<< HEAD
->>>>>>> Stashed changes
-=======
->>>>>>> 280597655cf3a9b3084b9bbeff6fd8c8943491e1
