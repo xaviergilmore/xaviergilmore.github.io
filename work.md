@@ -13,7 +13,7 @@ title: work
 	<div class="four columns">
 		<figure>
 			<img src="/assets/images/forumsound-website-screenshot.png" alt="forumsound-website-screenshot" width="100%">
-			<figcaption>Forumsound Website</figcaption>
+			<figcaption>Forum Sound Website</figcaption>
 		</figure>
 	</div>
 	<div class="four columns">
