@@ -1,0 +1,12 @@
+<nav id="sections-navigation">
+  <div class="row">
+  {% for item in site.data.projects-navigation %}
+  <div class="three columns center">
+    <h1>
+      <a href="{{ item.link }}"{% if page.url == item.link %} class="project-link"{% endif %}>: : {{ item.name }} : :</a>
+    </h1>
+  </div>
+  {% endfor %}
+  </div>
+</nav>
+<hr>

@@ -12,31 +12,71 @@ body {
   margin: 0;
 }
 
-h1 {
-  font-size: 3rem;
-}
-
 .wrapper {
   min-height: 100%;
   display: grid;
   grid-template-rows: auto 1fr auto;
 }
 
+a {
+  text-decoration: none;
+}
+
 nav, section, footer {
   padding: 20px;
 }
 
-a {
-  text-decoration: none;
-  color: #000;
+img {
+  width: 100%;
 }
 
-a:hover {
+dl {
+  display: grid;
+  grid-template-columns: 120px 1fr; /* Side-by-side layout */
+  gap: 10px 20px;
+}
+
+dt {
+  font-weight: bold;
+}
+
+dd {
+  margin: 0; /* Reset default browser indentation */
+}
+
+#main-nav {
+  background: linear-gradient(258deg, rgba(53, 214, 43, 0.81), rgba(137, 249, 48, 0.9));
+  -webkit-background: linear-gradient(258deg, rgba(53, 214, 43, 0.81), rgba(137, 249, 48, 0.9));
+  -moz-background: linear-gradient(258deg, rgba(53, 214, 43, 0.81), rgba(137, 249, 48, 0.9));
+}
+#main-nav a {
+  color: #fff;
+}
+#main-nav a:hover {
+  color: green;
+}
+#main-nav .current {
   color: green;
 }
 
-.current {
-  color: green;
+.center {
+  margin: auto;
+  text-align: center;
+}
+
+#sections-navigation {
+  padding: 25px 0px 0px;
+}
+#sections-navigation a {
+  color: #222;
+}
+#sections-navigation a:hover {
+  font-style: italic;
+  color: rgba(53, 214, 43, 0.81);
+}
+#sections-navigation .project-link {
+  font-style: italic;
+  color: rgba(53, 214, 43, 0.81);
 }
 
 /*# sourceMappingURL=styles.css.map */
