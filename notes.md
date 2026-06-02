@@ -18,6 +18,8 @@ title: notes
 		<dd>Wide area network.</dd>
 		<dt>TCP/IP</dt>
 		<dd>Transmission Control Protocol/Internet Protocol.</dd>
+		<dt>MPLS</dt>
+		<dd>Multiprotocol Label Switching</dd>
 	</dl>
 	
 
