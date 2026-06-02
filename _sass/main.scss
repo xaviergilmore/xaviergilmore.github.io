@@ -12,9 +12,6 @@ body {
   margin: 0;
 }
 
-h1 {
-  font-size: 3.0rem;
-}
 
 .wrapper {
   min-height: 100%;
@@ -22,19 +19,63 @@ h1 {
   grid-template-rows: auto 1fr auto;
 }
 
+a {
+  text-decoration: none;
+}
+
 nav, section, footer {
   padding: 20px  
 }
 
-a {
-  text-decoration: none;
-  color: #000;
+img {
+  width: 100%;
 }
 
-a:hover {
-  color: green;
+dl {
+  display: grid;
+  grid-template-columns: 120px 1fr; /* Side-by-side layout */
+  gap: 10px 20px;
 }
 
-.current {
-  color: green;
+dt {
+  font-weight: bold;
+}
+
+dd {
+  margin: 0; /* Reset default browser indentation */
+}
+
+#main-nav {
+  background: linear-gradient(258deg, rgba(53, 214, 43, 0.81), rgba(137, 249, 48, 0.9));
+-webkit-background: linear-gradient(258deg, rgba(53, 214, 43, 0.81), rgba(137, 249, 48, 0.9));
+-moz-background: linear-gradient(258deg, rgba(53, 214, 43, 0.81), rgba(137, 249, 48, 0.9));
+  a {
+    color: #fff;
+  }
+  a:hover {
+    color: green;
+  }
+  .current {
+    color: green;
+  }
+}
+
+.center {
+  margin: auto;
+  text-align: center;
+}
+
+#sections-navigation  {
+  padding: 25px 0px 0px;
+  a {
+    color: #222;
+  }
+  a:hover {
+    font-style: italic;
+    color: rgba(53, 214, 43, 0.81);
+  }
+  .project-link {
+    font-style: italic;
+    color: rgba(53, 214, 43, 0.81);
+  }
 }

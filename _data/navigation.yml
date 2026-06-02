@@ -1,6 +1,8 @@
 - name: xaviergilmore.github.io
   link: /
-- name: work
-  link: /work.html
+- name: notes
+  link: /notes.html
+- name: projects
+  link: /projects.html
 - name: contact
   link: /contact.html
