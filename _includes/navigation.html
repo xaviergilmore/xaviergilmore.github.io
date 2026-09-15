@@ -1,5 +1,20 @@
-<nav id="main-nav">
-  {% for item in site.data.navigation %}
-    / <a href="{{ item.link }}"{% if page.url == item.link %} class="current"{% endif %}>{{ item.name }}</a>
-  {% endfor %}
+<nav id="main-nav" class="navbar">
+  <ul class="nav-links">
+    {% for item in site.data.navigation %}
+      {% if item.dropdown %}
+      <li class="nav-item has-dropdown">
+        <a href="{{ item.link }}" class="dropdown-toggle">/ {{ item.name }}</a>
+        <ul class="dropdown-menu">
+          {% for subitem in item.dropdown %}
+            <li><a href="{{ subitem.link }}">{{ subitem.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a href="{{ item.link }}">/ {{ item.name }}</a>
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
 </nav>

@@ -1,0 +1,9 @@
+<nav id="notes-nav" class="navbar">
+  <ul class="nav-links">
+    {% for item in site.data.notes-navigation %}
+      <li class="nav-item">
+        <a href="{{ item.link }}">/ {{ item.name }} </a>
+      </li>
+    {% endfor %}
+  </ul>
+</nav>

@@ -1,8 +1,13 @@
 - name: xaviergilmore.github.io
-  link: /
+  link: '/'
 - name: notes
-  link: /notes.html
+  link: '/notes/'
+  dropdown:
+    - name: cts
+      link: '/cts/'
+    - name: network+
+      link: '/networkplus/'
 - name: projects
-  link: /projects.html
+  link: '/projects.html'
 - name: contact
-  link: /contact.html
+  link: '/contact/'
