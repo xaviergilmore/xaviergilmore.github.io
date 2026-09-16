@@ -140,6 +140,11 @@ dd {
     text-align: center;
     display: block;
   }
+  .has-dropdown:hover .dropdown-menu {
+    display: block !important;
+    text-align: center;
+    position: relative;
+  }
   #notes-nav .nav-links {
     display: flex;
   }
