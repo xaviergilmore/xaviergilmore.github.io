@@ -1,3 +1,5 @@
+- name: notes
+  link: '/notes.html'
 - name: cts
   link: '/cts.html'
 - name: network+
