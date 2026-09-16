@@ -10,10 +10,10 @@ title: notes
     <h2>Subjects</h2>
     <ul>
     	<li>
-    		<a href="./cts.html/">CTS - Certified Technology Specialist</a>
+    		<a href="/cts.html">CTS - Certified Technology Specialist</a>
     	</li>
     	<li>
-    		<a href="./networkplus.html/">Network+</a>
+    		<a href="/networkplus.html">Network+</a>
     	</li>
     </ul>
 
