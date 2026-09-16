@@ -103,24 +103,46 @@ dd {
   background-color: #05081c;
 }
 
-.center {
-  margin: auto;
-  text-align: center;
+.navbar .nav-trigger {
+  display: none;
 }
 
-#sections-navigation {
-  padding: 25px 0px 0px;
+.navbar .menu-icon {
+  display: none;
 }
-#sections-navigation a {
-  color: #222;
+
+/* Mobile screen styles */
+.hamburger-icon path {
+  fill: #fff; /* Put your desired hex code or color name here */
 }
-#sections-navigation a:hover {
-  font-style: italic;
-  color: rgba(53, 214, 43, 0.81);
-}
-#sections-navigation .project-link {
-  font-style: italic;
-  color: rgba(53, 214, 43, 0.81);
+
+@media screen and (max-width: 600px) {
+  .navbar .menu-icon {
+    display: block;
+    float: right;
+    width: 36px;
+    height: 26px;
+    cursor: pointer;
+  }
+  .navbar .trigger {
+    clear: both;
+    display: none;
+  }
+  .navbar .nav-trigger:checked ~ .trigger {
+    display: block;
+    padding-bottom: 15px;
+  }
+  .navbar .trigger a {
+    display: block;
+    padding: 5px 10px;
+  }
+  .navbar ul {
+    text-align: center;
+    display: block;
+  }
+  #notes-nav .nav-links {
+    display: flex;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */
