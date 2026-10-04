@@ -10,10 +10,15 @@ function App() {
   const [js, setJs] = useState('');
   const [srcDoc, setSrcDoc] = useState(''); 
   const [logs, setLogs] = useState([]);
+  const [hidePreview, setHidePreview] = useState(false);
 
-  // 1. Read layout properties from Jekyll's container DOM node
-  const containerNode = document.getElementById('react-editor-root');
-  const hidePreview = containerNode ? containerNode.getAttribute('data-hide-preview') === 'true' : false;
+  // 1. Read layout properties safely after DOM has painted
+  useEffect(() => {
+    const containerNode = document.getElementById('react-editor-root');
+    if (containerNode) {
+      setHidePreview(containerNode.getAttribute('data-hide-preview') === 'true');
+    }
+  }, []);
 
   const onTabClick = (editorName) => {
     setOpenedEditor(editorName);
@@ -21,24 +26,26 @@ function App() {
 
   // Compile inputs into an HTML document with a 250ms debounce
   useEffect(() => {
-    setLogs([]);
-
     const timeout = setTimeout(() => {
       setSrcDoc(`
+        <!DOCTYPE html>
         <html>
           <head>
             <style>${css}</style>
             <script>
-              const _log = console.log;
-              console.log = (...args) => {
-                _log(...args); 
-                window.parent.postMessage({ type: 'CONSOLE_LOG', data: args.join(' ') }, '*');
-              };
+              // Robust messaging hook that safely binds to the runtime environment
+              (function() {
+                const _log = console.log;
+                console.log = (...args) => {
+                  _log(...args); 
+                  window.parent.postMessage({ type: 'CONSOLE_LOG', data: args.join(' ') }, '*');
+                };
 
-              window.onerror = function(message) {
-                window.parent.postMessage({ type: 'CONSOLE_ERROR', data: message }, '*');
-                return false;
-              };
+                window.onerror = function(message) {
+                  window.parent.postMessage({ type: 'CONSOLE_ERROR', data: message }, '*');
+                  return false;
+                };
+              })();
             </script>
           </head>
           <body>
@@ -69,13 +76,13 @@ function App() {
 
   return (
     <div className="App">
-      {/* 2. Dynamically attach a CSS flag class if the preview panel is disabled */}
       <div className={`sandbox-container ${hidePreview ? 'no-preview-layout' : ''}`}>
         <div className="tab-button-container">
           <Button title="HTML" onClick={() => onTabClick('html')} />
           <Button title="CSS" onClick={() => onTabClick('css')} />
           <Button title="Javascript" onClick={() => onTabClick('js')} />
         </div>
+        
         <div className="top-row-container">
           <div className="editor-left">
             <div className="editors-wrapper">
@@ -89,7 +96,7 @@ function App() {
             </div>
           </div>
 
-          {/* 3. Conditional Layout Engine Check: Only load the frame element if requested */}
+          {/* 3. Conditional Layout Engine Check */}
           {!hidePreview && (
             <div className="editor-right">
               <div className="output-container">
@@ -106,7 +113,7 @@ function App() {
           )}
         </div>
 
-        {/* 4. Refactored Code Terminal Tray (All inline styling removed) */}
+        {/* 4. Refactored Code Terminal Tray */}
         <div className="console-container">
           <div className="console-header">
             <span className="console-title">Console Output</span>
@@ -134,4 +141,5 @@ function App() {
 }
 
 export default App;
+
 

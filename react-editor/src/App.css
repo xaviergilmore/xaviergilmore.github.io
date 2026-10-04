@@ -207,16 +207,18 @@
 
 .top-row-container {
   display: flex;
-  flex: 3; /* Takes up 3/4 of the layout area vertical plane weight scale */
-  border-bottom: 2px solid #333;
-  min-height: 0;
+  flex-direction: row;
+  width: 100%;
+  min-height: 450px;
+  gap: 20px;
+  margin-bottom: 20px;
 }
 
-.editor-left {
+
+.editor-left, .editor-right {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  border-right: 1px solid #333;
+  width: 50%;
+  min-width: 0; /* Keeps CodeMirror box boundaries safe */
 }
 
 .editors-wrapper {
@@ -224,16 +226,13 @@
   height: 100%;
 }
 
-.editor-right {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
 
 .output-container {
-  flex: 1;
+  width: 100%;
   height: 100%;
-  background-color: #fff;
+  background: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .output-container iframe {
@@ -243,7 +242,7 @@
 /* --- Cleaned and Optimized Console Styles --- */
 .console-container {
   flex: 1.2; /* Controls the proportional height weight assignment */
-  background: #1e1e1e;
+  background: #fff;
   font-family: 'Courier New', Courier, monospace;
   display: flex;
   flex-direction: column;
@@ -320,18 +319,13 @@
 
 /* Restructure panel alignments under the secondary modifier class context */
 .no-preview-layout .top-row-container {
-  flex: 1;
-  border-bottom: none;
-  border-right: 2px solid #333;
+  flex-direction: column;
 }
-
 .no-preview-layout .editor-left {
-  border-right: none;
+  width: 100%;
 }
 
-.no-preview-layout .console-container {
-  flex: 1;
-}
+
 
 /* --- RESPONSIVE SCREEN BREAKPOINT RULES --- */
 @media (max-width: 768px) {
