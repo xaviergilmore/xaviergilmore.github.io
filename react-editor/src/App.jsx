@@ -71,13 +71,11 @@ function App() {
     <div className="App">
       {/* 2. Dynamically attach a CSS flag class if the preview panel is disabled */}
       <div className={`sandbox-container ${hidePreview ? 'no-preview-layout' : ''}`}>
-        
         <div className="tab-button-container">
           <Button title="HTML" onClick={() => onTabClick('html')} />
           <Button title="CSS" onClick={() => onTabClick('css')} />
           <Button title="Javascript" onClick={() => onTabClick('js')} />
         </div>
-
         <div className="top-row-container">
           <div className="editor-left">
             <div className="editors-wrapper">
