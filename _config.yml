@@ -19,9 +19,8 @@ defaults:
       layout: "default"
 
 exclude:
-      - react-editor/node_modules
-      - react-editor/src
-      - react-editor/package.json
-      - react-editor/package-lock.json
-
+  - react-editor/node_modules
+  - react-editor/src
+  - react-editor/package.json
+  - react-editor/package-lock.json
       
