@@ -76,6 +76,7 @@ function App() {
 
   return (
     <div className="App">
+<<<<<<< HEAD
       <div className={`sandbox-container ${hidePreview ? 'no-preview-layout' : ''}`}>
         <div className="tab-button-container">
           <Button title="HTML" onClick={() => onTabClick('html')} />
@@ -95,6 +96,14 @@ function App() {
               )}
             </div>
           </div>
+=======
+      <p>Welcome to the editor!</p>
+      <div className="tab-button-container">
+        <Button title="HTML" onClick={() => onTabClick('html')} />
+        <Button title="CSS" onClick={() => onTabClick('css')} />
+        <Button title="Javascript" onClick={() => onTabClick('js')} />
+      </div>
+>>>>>>> parent of d8dee9a (syncing local and production environments)
 
           {/* 3. Conditional Layout Engine Check */}
           {!hidePreview && (
