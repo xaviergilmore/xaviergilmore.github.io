@@ -7,7 +7,7 @@ export default defineConfig({
   base: './',
   build: {
     // Direct output into Jekyll's main asset directories
-    outDir: path.resolve(__dirname, '../'),
+    outDir: path.resolve(process.cwd(), '../'),
     emptyOutDir: false, // Prevent Vite from wiping out the whole Jekyll root folder
     rollupOptions: {
       input: path.resolve(__dirname, 'src/main.jsx'), // Path to your React entry point
