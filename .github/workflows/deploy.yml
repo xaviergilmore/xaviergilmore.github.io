@@ -1,3 +1,15 @@
+name: Deploy Jekyll site with Vite/React
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -26,8 +38,10 @@ jobs:
           npm run build
 
       - name: Setup Ruby
-        uses: actions/configure-pages@v5
-        # This will automatically read your Gemfile to use the correct Jekyll dependencies
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2' # Adjust to match your local ruby version if needed
+          bundler-cache: true # This automatically runs bundle install and caches gems
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -39,6 +53,8 @@ jobs:
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
 
       - name: Deploy to GitHub Pages
         id: deployment
