@@ -68,7 +68,6 @@ function App() {
 
   return (
     <div className="App">
-      <p>Welcome to the editor!</p>
       <div className="tab-button-container">
         <Button title="HTML" onClick={() => onTabClick('html')} />
         <Button title="CSS" onClick={() => onTabClick('css')} />
