@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Editor</title>
+    <title>Sandbox</title>
     <link rel="stylesheet" href="/assets/css/skeleton.css">
     <link rel="stylesheet" href="/assets/css/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -58,14 +58,20 @@
 
       <section>
         <div class="container">
-	 <h1>My React Interactive Editor</h1>
+	 <h1>Sandbox</h1>
 
-	<!-- DOM target container for React -->
-<div id="react-editor-root"></div>
+	
 
-<!-- Load styles and module script produced by Vite -->
-<link rel="stylesheet" href="/assets/css/react-editor.css">
-<script type="module" src="/assets/js/react-editor.js"></script>
+
+
+
+<!-- Core DOM Target containing configuration metrics for React -->
+<div id="react-editor-root" data-hide-preview="false"></div>
+
+<!-- Sourcing the active engine build logic via your dev proxy filter -->
+
+  <script type="module" src="http://localhost:5173/src/main.jsx"></script>
+
 
 </div>
 

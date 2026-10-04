@@ -1,6 +1,21 @@
-<!-- DOM target container for React -->
-<div id="react-editor-root"></div>
+{% comment %}
+  Jekyll Sandbox Shortcode Include
+  Parameters:
+    - layout: "full" (default) or "side-by-side"
+{% endcomment %}
 
-<!-- Load styles and module script produced by Vite -->
-<link rel="stylesheet" href="{{ '/assets/css/react-editor.css' | relative_url }}">
-<script type="module" src="{{ '/assets/js/react-editor.js' | relative_url }}"></script>
+{% assign hide_preview = "false" %}
+{% if include.layout == "side-by-side" %}
+  {% assign hide_preview = "true" %}
+{% endif %}
+
+<!-- Core DOM Target containing configuration metrics for React -->
+<div id="react-editor-root" data-hide-preview="{{ hide_preview }}"></div>
+
+<!-- Sourcing the active engine build logic via your dev proxy filter -->
+{% if jekyll.environment == "development" %}
+  <script type="module" src="http://localhost:5173/src/main.jsx"></script>
+{% else %}
+  <link rel="stylesheet" href="{{ '/assets/css/react-editor.css' | relative_url }}">
+  <script type="module" src="{{ '/assets/js/react-editor.js' | relative_url }}"></script>
+{% endif %}

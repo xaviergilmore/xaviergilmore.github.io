@@ -185,13 +185,178 @@
 
 
 /* code editor */
-#root {
-  text-align: left;
-}
-.tab-button-container {
+/* --- Core Flexbox Sandbox Architecture --- */
+.sandbox-container {
   display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 550px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: #1e1e1e;
+  box-sizing: border-box;
 }
 
-.editors-container {
-  padding-top: 0.4%;
+.tab-button-container {
+  display: flex;
+  background-color: #2d2d2d;
+  border-bottom: 1px solid #1e1e1e;
+  padding: 4px 8px 0 8px;
+}
+
+.top-row-container {
+  display: flex;
+  flex: 3; /* Takes up 3/4 of the layout area vertical plane weight scale */
+  border-bottom: 2px solid #333;
+  min-height: 0;
+}
+
+.editor-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #333;
+}
+
+.editors-wrapper {
+  flex: 1;
+  height: 100%;
+}
+
+.editor-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.output-container {
+  flex: 1;
+  height: 100%;
+  background-color: #fff;
+}
+
+.output-container iframe {
+  border: none;
+}
+
+/* --- Cleaned and Optimized Console Styles --- */
+.console-container {
+  flex: 1.2; /* Controls the proportional height weight assignment */
+  background: #1e1e1e;
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.console-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #333;
+  padding: 6px 12px;
+  background-color: #252525;
+}
+
+.console-title {
+  color: #aaa;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.console-clear-btn {
+  background: #333;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 3px 8px;
+  cursor: pointer;
+  font-size: 11px;
+  font-family: sans-serif;
+  transition: background 0.15s ease;
+}
+
+.console-clear-btn:hover {
+  background: #444;
+}
+
+.console-log-area {
+  flex: 1;
+  padding: 10px 12px;
+  overflow-y: auto;
+  background-color: #151515;
+  text-align: left;
+}
+
+.console-placeholder {
+  color: #666;
+  font-style: italic;
+  font-size: 13px;
+}
+
+.console-line {
+  margin: 0 0 6px 0;
+  font-size: 13px;
+  white-space: pre-wrap;
+  line-height: 1.4;
+}
+
+.console-line.is-log {
+  color: #00ff00;
+}
+
+.console-line.is-error {
+  color: #ff3333;
+}
+
+/* --- SIDE-BY-SIDE NO PREVIEW ALTERNATIVE LAYOUT MODEL --- */
+.sandbox-container.no-preview-layout {
+  flex-direction: row; 
+  height: 400px; /* Slimmer, more natural profile for standalone text tasks */
+}
+
+/* Restructure panel alignments under the secondary modifier class context */
+.no-preview-layout .top-row-container {
+  flex: 1;
+  border-bottom: none;
+  border-right: 2px solid #333;
+}
+
+.no-preview-layout .editor-left {
+  border-right: none;
+}
+
+.no-preview-layout .console-container {
+  flex: 1;
+}
+
+/* --- RESPONSIVE SCREEN BREAKPOINT RULES --- */
+@media (max-width: 768px) {
+  /* Standard side-by-side mode layout transformation rules */
+  .sandbox-container:not(.no-preview-layout) {
+    height: 750px;
+  }
+  
+  .sandbox-container:not(.no-preview-layout) .top-row-container {
+    flex-direction: column;
+  }
+  
+  .sandbox-container:not(.no-preview-layout) .editor-left {
+    border-right: none;
+    border-bottom: 1px solid #333;
+  }
+
+  /* No-Preview Layout mobile specific optimizations */
+  .sandbox-container.no-preview-layout {
+    flex-direction: column;
+    height: 550px;
+  }
+  
+  .no-preview-layout .top-row-container {
+    border-right: none;
+    border-bottom: 2px solid #333;
+  }
 }

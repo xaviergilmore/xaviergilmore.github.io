@@ -17,31 +17,11 @@ const Editor = ({ language, value, setEditorState }) => {
   };
 
   const getThemeExtension = () => {
-    switch (theme) {
-      case 'material': return material;
-      case 'eclipse': return eclipse;
-      case 'tokyo-night': return tokyoNight;
-      case 'noctis-lilac': return noctisLilac;
-      default: return dracula;
-    }
-  };
+      return dracula;
+    };
 
   return (
-    <div className="editor-container" style={{ padding: '10px' }}>
-      <div style={{ marginBottom: '10px' }}>
-        <label htmlFor="themes">Choose a theme: </label>
-        <select 
-          id="themes"
-          value={theme} 
-          onChange={(el) => setTheme(el.target.value)}
-        >
-          <option value="dracula">Dracula</option>
-          <option value="material">Material</option>
-          <option value="eclipse">Eclipse (Light)</option>
-          <option value="tokyo-night">Tokyo Night</option>
-          <option value="noctis-lilac">Noctis Lilac</option>
-        </select>
-      </div>
+   <div className="editor-container">
 
       <CodeMirror
         value={value}

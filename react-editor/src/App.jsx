@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; // Make sure useEffect is imported
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Button from './components/Button';
 import Editor from './components/Editor';
@@ -8,9 +8,12 @@ function App() {
   const [html, setHtml] = useState('');
   const [css, setCss] = useState('');
   const [js, setJs] = useState('');
-  const [srcDoc, setSrcDoc] = useState(''); // Stores compiled output
-  const [logs,setLogs] = useState([]);
+  const [srcDoc, setSrcDoc] = useState(''); 
+  const [logs, setLogs] = useState([]);
 
+  // 1. Read layout properties from Jekyll's container DOM node
+  const containerNode = document.getElementById('react-editor-root');
+  const hidePreview = containerNode ? containerNode.getAttribute('data-hide-preview') === 'true' : false;
 
   const onTabClick = (editorName) => {
     setOpenedEditor(editorName);
@@ -18,7 +21,6 @@ function App() {
 
   // Compile inputs into an HTML document with a 250ms debounce
   useEffect(() => {
-
     setLogs([]);
 
     const timeout = setTimeout(() => {
@@ -27,18 +29,17 @@ function App() {
           <head>
             <style>${css}</style>
             <script>
-            const _log = console.log;
-            console.log = (...args) => {
-              _log(...args); // Keep regular browser console logging active
-              window.parent.postMessage({ type: 'CONSOLE_LOG', data: args.join(' ') }, '*');
-            };
+              const _log = console.log;
+              console.log = (...args) => {
+                _log(...args); 
+                window.parent.postMessage({ type: 'CONSOLE_LOG', data: args.join(' ') }, '*');
+              };
 
-            // Catch runtime JavaScript execution errors too!
-            window.onerror = function(message) {
-              window.parent.postMessage({ type: 'CONSOLE_ERROR', data: message }, '*');
-              return false;
-            };
-          </script>
+              window.onerror = function(message) {
+                window.parent.postMessage({ type: 'CONSOLE_ERROR', data: message }, '*');
+                return false;
+              };
+            </script>
           </head>
           <body>
             ${html}
@@ -51,107 +52,88 @@ function App() {
     return () => clearTimeout(timeout);
   }, [html, css, js]);
 
+  // Hook into cross-frame message bridges
   useEffect(() => {
-  const handleConsoleMessage = (event) => {
-    if (event.data && event.data.type === 'CONSOLE_LOG') {
-      setLogs((prev) => [...prev, { type: 'log', text: event.data.data }]);
-    }
-    if (event.data && event.data.type === 'CONSOLE_ERROR') {
-      setLogs((prev) => [...prev, { type: 'error', text: event.data.data }]);
-    }
-  };
+    const handleConsoleMessage = (event) => {
+      if (event.data && event.data.type === 'CONSOLE_LOG') {
+        setLogs((prev) => [...prev, { type: 'log', text: event.data.data }]);
+      }
+      if (event.data && event.data.type === 'CONSOLE_ERROR') {
+        setLogs((prev) => [...prev, { type: 'error', text: event.data.data }]);
+      }
+    };
 
-  window.addEventListener('message', handleConsoleMessage);
-  return () => window.removeEventListener('message', handleConsoleMessage);
+    window.addEventListener('message', handleConsoleMessage);
+    return () => window.removeEventListener('message', handleConsoleMessage);
   }, []);
-
 
   return (
     <div className="App">
-      <div className="tab-button-container">
-        <Button title="HTML" onClick={() => onTabClick('html')} />
-        <Button title="CSS" onClick={() => onTabClick('css')} />
-        <Button title="Javascript" onClick={() => onTabClick('js')} />
-      </div>
-
-      <div className="editors-wrapper">
-        {openedEditor === 'html' ? (
-          <Editor language="xml" value={html} setEditorState={setHtml} />
-        ) : openedEditor === 'css' ? (
-          <Editor language="css" value={css} setEditorState={setCss} />
-        ) : (
-          <Editor language="javascript" value={js} setEditorState={setJs} />
-        )}
-      </div>
-
-      {/* Modern Live Iframe Output Preview Section */}
-      <div className="output-container" style={{ marginTop: '20px', height: '40vh', borderTop: '2px solid #ccc' }}>
-        <iframe
-          srcDoc={srcDoc}
-          title="output-preview"
-          sandbox="allow-scripts"
-          frameBorder="0"
-          width="100%"
-          height="100%"
-        />
-      </div>
-      {/* UPDATED CUSTOM CONSOLE LOG TERMINAL COMPONENT */}
-      <div className="console-container" style={{
-        background: '#1e1e1e',
-        color: '#00ff00',
-        fontFamily: 'monospace',
-        padding: '10px',
-        height: '150px',
-        overflowY: 'auto',
-        borderTop: '2px solid #333',
-        textAlign: 'left'
-      }}>
-        {/* Header with Title and Clear Button */}
-        <div style={{ 
-          display: 'flex', 
-          justifyContent: 'space-between', 
-          alignItems: 'center',
-          borderBottom: '1px solid #333', 
-          paddingBottom: '5px', 
-          marginBottom: '5px' 
-        }}>
-          <span style={{ color: '#aaa', fontWeight: 'bold' }}>Console Output</span>
-          <button 
-            onClick={() => setLogs([])}
-            style={{
-              background: '#333',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '3px',
-              padding: '3px 8px',
-              cursor: 'pointer',
-              fontSize: '11px',
-              fontFamily: 'sans-serif'
-            }}
-            onMouseOver={(e) => e.target.style.background = '#444'}
-            onMouseOut={(e) => e.target.style.background = '#333'}
-          >
-            Clear Console
-          </button>
+      {/* 2. Dynamically attach a CSS flag class if the preview panel is disabled */}
+      <div className={`sandbox-container ${hidePreview ? 'no-preview-layout' : ''}`}>
+        
+        <div className="tab-button-container">
+          <Button title="HTML" onClick={() => onTabClick('html')} />
+          <Button title="CSS" onClick={() => onTabClick('css')} />
+          <Button title="Javascript" onClick={() => onTabClick('js')} />
         </div>
 
-        {/* Log Output List */}
-        {logs.length === 0 ? (
-          <span style={{ color: '#666', fontStyle: 'italic' }}>Console is clear. Try writing console.log() in JS tab.</span>
-        ) : (
-          logs.map((log, index) => (
-            <div key={index} style={{ 
-              color: log.type === 'error' ? '#ff3333' : '#00ff00',
-              marginBottom: '4px',
-              whiteSpace: 'pre-wrap'
-            }}>
-              {log.type === 'error' ? '❌ ' : '❯ '} {log.text}
+        <div className="top-row-container">
+          <div className="editor-left">
+            <div className="editors-wrapper">
+              {openedEditor === 'html' ? (
+                <Editor language="xml" value={html} setEditorState={setHtml} />
+              ) : openedEditor === 'css' ? (
+                <Editor language="css" value={css} setEditorState={setCss} />
+              ) : (
+                <Editor language="javascript" value={js} setEditorState={setJs} />
+              )}
             </div>
-          ))
-        )}
+          </div>
+
+          {/* 3. Conditional Layout Engine Check: Only load the frame element if requested */}
+          {!hidePreview && (
+            <div className="editor-right">
+              <div className="output-container">
+                <iframe
+                  srcDoc={srcDoc}
+                  title="output-preview"
+                  sandbox="allow-scripts"
+                  width="100%"
+                  height="100%"
+                  scrolling="yes"
+                />
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* 4. Refactored Code Terminal Tray (All inline styling removed) */}
+        <div className="console-container">
+          <div className="console-header">
+            <span className="console-title">Console Output</span>
+            <button className="console-clear-btn" onClick={() => setLogs([])}>
+              Clear Console
+            </button>
+          </div>
+
+          <div className="console-log-area">
+            {logs.length === 0 ? (
+              <span className="console-placeholder">Console is clear. Try writing console.log() in JS tab.</span>
+            ) : (
+              logs.map((log, index) => (
+                <div key={index} className={`console-line ${log.type === 'error' ? 'is-error' : 'is-log'}`}>
+                  {log.type === 'error' ? '❌ ' : '❯ '} {log.text}
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+
       </div>
     </div>
   );
 }
 
 export default App;
+
