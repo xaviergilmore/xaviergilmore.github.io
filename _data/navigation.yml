@@ -9,5 +9,7 @@
       link: '/networkplus.html'
 - name: projects
   link: '/projects.html'
+- name: sandbox
+  link: '/sandbox.html'
 - name: contact
   link: '/contact.html'
