@@ -4,6 +4,7 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
+  base: './',
   build: {
     // Direct output into Jekyll's main asset directories
     outDir: path.resolve(__dirname, '../'),
