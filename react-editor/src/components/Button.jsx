@@ -1,19 +1,13 @@
 import React from 'react'
-const Button = ({title, onClick}) => {
-	return (
-		<div>
-			<button
-				style={{
-					maxWidth: "140px",
-					minWidth: "80px",
-					height: "30px",
-					marginRight: "5px"
-				}}
-				onClick ={onClick}
-			>
-				{title}
-			</button>
-		</div>
-	)
+function Button({ title, onClick, active }) {
+  return (
+    <button
+      className={`editor-tab-button ${active ? 'active' : ''}`}
+      onClick={onClick}
+    >
+      {title}
+    </button>
+  );
 }
-export default Button
+
+export default Button;

@@ -97,9 +97,23 @@ useEffect(() => {
     <div className="App">
       <div className={`sandbox-container ${hidePreview ? 'no-preview-layout' : ''}`}>
         <div className="tab-button-container">
-          <Button title="HTML" onClick={() => onTabClick('html')} />
-          <Button title="CSS" onClick={() => onTabClick('css')} />
-          <Button title="Javascript" onClick={() => onTabClick('js')} />
+          <Button
+            title="HTML"
+            onClick={() => onTabClick('html')}
+            active={openedEditor === 'html'}
+          />
+
+          <Button
+            title="CSS"
+            onClick={() => onTabClick('css')}
+            active={openedEditor === 'css'}
+          />
+
+          <Button
+            title="Javascript"
+            onClick={() => onTabClick('js')}
+            active={openedEditor === 'js'}
+          />
         </div>
         
         <div className="top-row-container">
@@ -116,22 +130,20 @@ useEffect(() => {
           </div>
 
           {/* 3. Conditional Layout Engine Check */}
-          {!hidePreview && (
-            <div className="editor-right">
-              <div className="output-container">
-                <iframe
-                  srcDoc={srcDoc}
-                  title="output-preview"
-                  sandbox="allow-scripts"
-                  width="100%"
-                  height="100%"
-                  scrolling="yes"
-                />
-              </div>
-            </div>
-          )}
+         <div className={`editor-right ${hidePreview ? 'hidden-preview' : ''}`}>
+          <div className="output-container">
+            <iframe
+              srcDoc={srcDoc}
+              title="output-preview"
+              sandbox="allow-scripts"
+              width="100%"
+              height="100%"
+              scrolling="yes"
+            />
+          </div>
         </div>
-
+      </div>
+      
         {/* 4. Refactored Code Terminal Tray */}
         <div className="console-container">
           <div className="console-header">

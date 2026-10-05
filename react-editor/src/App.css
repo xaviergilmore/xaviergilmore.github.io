@@ -205,6 +205,24 @@
   padding: 4px 8px 0 8px;
 }
 
+.editor-tab-button {
+  background: transparent;
+  color: #aaa;
+  border: none;
+  padding: 0px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  height: 30px;
+}
+
+.editor-tab-button:hover {
+  color: #fff;
+}
+
+.editor-tab-button.active {
+  color: #fff;
+}
+
 .top-row-container {
   display: flex;
   flex: 3; /* Takes up 3/4 of the layout area vertical plane weight scale */
@@ -312,51 +330,91 @@
   color: #ff3333;
 }
 
-/* --- SIDE-BY-SIDE NO PREVIEW ALTERNATIVE LAYOUT MODEL --- */
+/* --- SIDE-BY-SIDE NO PREVIEW LAYOUT --- */
+
 .sandbox-container.no-preview-layout {
-  flex-direction: row; 
-  height: 400px; /* Slimmer, more natural profile for standalone text tasks */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr;
+  height: 400px;
 }
 
-/* Restructure panel alignments under the secondary modifier class context */
+/* Tabs stay across the entire top */
+.no-preview-layout .tab-button-container {
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+/* Editor occupies bottom-left */
 .no-preview-layout .top-row-container {
-  flex: 1;
+  grid-column: 1;
+  grid-row: 2;
+
+  min-width: 0;
+  min-height: 0;
+
   border-bottom: none;
   border-right: 2px solid #333;
 }
 
+/* Editor fills its half */
 .no-preview-layout .editor-left {
+  width: 100%;
+  min-width: 0;
   border-right: none;
 }
 
+/* Console occupies bottom-right */
 .no-preview-layout .console-container {
-  flex: 1;
+  grid-column: 2;
+  grid-row: 2;
+
+  min-width: 0;
+  min-height: 0;
+}
+
+.no-preview-layout .hidden-preview {
+  display: none;
 }
 
 /* --- RESPONSIVE SCREEN BREAKPOINT RULES --- */
 @media (max-width: 768px) {
-  /* Standard side-by-side mode layout transformation rules */
+
   .sandbox-container:not(.no-preview-layout) {
     height: 750px;
   }
-  
+
   .sandbox-container:not(.no-preview-layout) .top-row-container {
     flex-direction: column;
   }
-  
+
   .sandbox-container:not(.no-preview-layout) .editor-left {
     border-right: none;
     border-bottom: 1px solid #333;
   }
 
-  /* No-Preview Layout mobile specific optimizations */
+  /* Side-by-side becomes stacked on small screens */
   .sandbox-container.no-preview-layout {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr 1fr;
     height: 550px;
   }
-  
+
+  .no-preview-layout .tab-button-container {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
   .no-preview-layout .top-row-container {
+    grid-column: 1;
+    grid-row: 2;
+
     border-right: none;
     border-bottom: 2px solid #333;
+  }
+
+  .no-preview-layout .console-container {
+    grid-column: 1;
+    grid-row: 3;
   }
 }

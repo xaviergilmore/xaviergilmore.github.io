@@ -12,8 +12,5 @@
 - name: sandbox
   link: '/sandbox.html'
   permalink: /sandbox/
-- name: sandbox2
-  link: '/sandbox2.html'
-  permalink: /sandbox2/
 - name: contact
   link: '/contact.html'
