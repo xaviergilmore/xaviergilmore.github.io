@@ -25,39 +25,58 @@ function App() {
   };
 
   // Compile inputs into an HTML document with a 250ms debounce
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setSrcDoc(`
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <style>${css}</style>
-            <script>
-              // Robust messaging hook that safely binds to the runtime environment
-              (function() {
-                const _log = console.log;
-                console.log = (...args) => {
-                  _log(...args); 
-                  window.parent.postMessage({ type: 'CONSOLE_LOG', data: args.join(' ') }, '*');
-                };
+useEffect(() => {
+  const timeout = setTimeout(() => {
 
-                window.onerror = function(message) {
-                  window.parent.postMessage({ type: 'CONSOLE_ERROR', data: message }, '*');
-                  return false;
-                };
-              })();
-            </script>
-          </head>
-          <body>
-            ${html}
-            <script>${js}</script>
-          </body>
-        </html>
-      `);
-    }, 250);
+    // Clear output from the previous execution
+    setLogs([]);
 
-    return () => clearTimeout(timeout);
-  }, [html, css, js]);
+    setSrcDoc(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <style>${css}</style>
+
+          <script>
+            (function() {
+              const _log = console.log;
+
+              console.log = (...args) => {
+                _log(...args);
+
+                window.parent.postMessage({
+                  type: 'CONSOLE_LOG',
+                  data: args.join(' ')
+                }, '*');
+              };
+
+              window.onerror = function(message) {
+                window.parent.postMessage({
+                  type: 'CONSOLE_ERROR',
+                  data: message
+                }, '*');
+
+                return true;
+              };
+            })();
+          </script>
+        </head>
+
+        <body>
+          ${html}
+
+          <script>
+            ${js}
+          </script>
+        </body>
+      </html>
+    `);
+
+  }, 250);
+
+  return () => clearTimeout(timeout);
+
+}, [html, css, js]);
 
   // Hook into cross-frame message bridges
   useEffect(() => {

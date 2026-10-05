@@ -5,13 +5,24 @@
 {% endcomment %}
 
 {% assign hide_preview = "false" %}
+
 {% if include.layout == "side-by-side" %}
   {% assign hide_preview = "true" %}
 {% endif %}
 
-<!-- Core DOM Target containing configuration metrics for React -->
-<div id="react-editor-root" data-hide-preview="{{ hide_preview }}"></div>
+<!-- React mount point -->
+<div
+  id="react-editor-root"
+  data-hide-preview="{{ hide_preview }}">
+</div>
 
-<!-- Sourcing the active engine build logic via your dev proxy filter -->
-  <link rel="stylesheet" href="{{ '/assets/css/react-editor.css' | relative_url }}">
-  <script type="module" src="{{ '/assets/js/react-editor.js' | relative_url }}"></script>
+<!-- Compiled React editor styles -->
+<link
+  rel="stylesheet"
+  href="{{ '/assets/css/react-editor.css' | relative_url }}">
+
+<!-- Compiled React editor -->
+<script
+  type="module"
+  src="{{ '/assets/js/react-editor.js' | relative_url }}">
+</script>
